@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <script type="text/javascript" src="static/jquery.min.js"></script>
+    <style>
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .tile {
+        width: 200px;
+        height: 200px;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tile t0"></div>
+    <div class="tile t1"></div>
+    <div class="tile t2"></div>
+    <div class="tile t3"></div>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    socket.on('/visual', function(msg){
+      for(var i = 0; i < msg.colors.length; i++) {
+        $('.t' + i).css('background-color', 'rgb(' + msg.colors[i][0] + ', ' + msg.colors[i][1] + ', ' + msg.colors[i][2] + ')');
+      }
+    });
+  </script>
+</html>
